@@ -1,0 +1,52 @@
+
+
+Algorithm Overview:
+
+Check if n is 2 or 3 and return the appropriate value.
+Divide n into as many threes as possible and handle the remainder for maximizing the product.
+Multiply the result based on the division and the remainder.
+Detailed Explanation:
+
+Check for n being 2 or 3:
+
+If (n) equals 2, return 1 (as specified in the problem).
+If (n) equals 3, return 2 (as specified in the problem).
+Divide n into as many threes as possible:
+
+Calculate the maximum number of threes that can be obtained from (n) using integer division ((n // 3)).
+Calculate the remainder after dividing (n) by 3 ((n % 3)).
+Handle remainder to maximize the product:
+
+If the remainder is 1:
+Borrow one from a three to make two 2s by decrementing threes by 1 and setting remainder to 4.
+If the remainder is 0:
+Set remainder to 1 (no need to borrow).
+Calculate the final product:
+
+Calculate the product by raising 3 to the power of threes ((3) raised to the power of (threes)) and multiplying by the remainder.
+Here's the provided code implementing the above steps:
+
+////////////////////////////////////////////// CODE///////////////////////////////////////////////
+
+var integerBreak = function(n) {
+  if(n===2){
+    return 1;
+  }  
+  if(n===3){
+      return 2;
+  }
+
+  //try to divide n into  as many threes as possible
+  let threes = Math.trunc(n/3);
+  let remainder = n%3;
+
+  if(remainder === 1){
+      threes -= 1; // remove 3*1
+      remainder = 4 // create 2*2
+  }
+  else if(remainder ===0){
+      remainder =1; // when reaminder is 0, set 1 which doesn't affect your answer
+  }
+
+  return Math.pow(3,threes)*remainder;
+};
